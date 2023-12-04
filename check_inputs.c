@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:14:33 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/01 09:43:04 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:26:24 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	is_not_num(int argc, char **argv)
 	return (0);
 }
 
-long	ft_atoi(char *argv)
+long	ftps_atoi(char *argv)
 {
 	long	num;
 	int		i;
@@ -111,7 +111,7 @@ int	ft_checkinputs(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_atoi(argv[i]) == -2147483649)
+		if (ftps_atoi(argv[i]) == -2147483649)
 			return (ft_error());
 		i++;
 	}

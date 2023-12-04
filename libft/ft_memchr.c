@@ -1,19 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/18 10:02:22 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/18 10:57:58 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	while (n--)
+	{
+		if (*(unsigned char *)s == (unsigned char)c)
+			return ((void *)s);
+		s++;
+	}
+	return (NULL);
 }
+
+/*
+int	main(void)
+{
+	unsigned char s[]="word";
+	int	c = 'x';
+	size_t	n = 16;
+
+	printf("%s\n", s);
+	printf("%s\n", (char *)ft_memchr(s, c, n));
+	printf("%s", (char *)memchr(s, c, n));
+	return (0);
+}
+*/

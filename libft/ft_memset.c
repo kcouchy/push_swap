@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/16 14:05:36 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/17 16:35:44 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	char	*temp;
+
+	temp = s;
+	while (n--)
+	{
+		*temp = (char)c;
+		temp++;
+	}
+	return (s);
 }
+
+/*
+int	main(void)
+{
+	char temp[] = "This ista test";
+	int len;
+	
+	len = 6;
+	printf("%s", ft_memset(temp, 65, len));
+	printf("%p", ft_memset(temp, 65, len));
+	return (0);
+}
+*/

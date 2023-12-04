@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/16 13:24:43 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/17 14:37:49 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+int	ft_isalpha(int c)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
 }

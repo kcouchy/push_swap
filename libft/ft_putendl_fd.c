@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/24 12:58:14 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/24 13:00:26 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+void	ft_putendl_fd(char *s, int fd)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
 }

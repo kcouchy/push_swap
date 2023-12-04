@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/16 13:42:37 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/17 16:51:39 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+int	ft_isprint(int c)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }

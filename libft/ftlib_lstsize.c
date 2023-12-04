@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ftlib_lstsize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/24 14:26:11 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/12/04 16:01:57 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+int	ftlib_lstsize(t_lblst *lst)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	int	lst_len;
+
+	lst_len = 0;
+	while (lst)
+	{
+		lst_len++;
+		lst = lst->next;
+	}
+	return (lst_len);
 }

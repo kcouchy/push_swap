@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/16 15:17:07 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/20 11:48:35 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	const char	*temp;
+
+	temp = NULL;
+	while (*s)
+	{
+		if (*(unsigned char *)s == (unsigned char)c)
+			temp = s;
+		s++;
+	}
+	if ((unsigned char)c == 0)
+		temp = s;
+	return ((char *)temp);
 }

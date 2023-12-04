@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ftlib_lstclear.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/25 16:01:32 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/12/04 16:01:57 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+void	ftlib_lstclear(t_lblst **lst, void (*del)(void *))
 {
-	write(1, "Error\n", 6);
-	return (1);
+	t_lblst	*temp;
+
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		ftlib_lstdelone(*lst, del);
+		*lst = temp;
+	}
 }

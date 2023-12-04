@@ -6,7 +6,7 @@
 #    By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 10:04:34 by kcouchma          #+#    #+#              #
-#    Updated: 2023/12/01 10:30:15 by kcouchma         ###   ########.fr        #
+#    Updated: 2023/12/04 15:38:12 by kcouchma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,14 @@ SRCS =								\
 				errors				\
 				check_inputs		\
 				make_lists			\
-				mod_lists
+				mod_lists			\
+				sorting				\
+				sorting_combi
 
 BONUS_SRCS =						\
 				
 
-INC_FILES = push_swap.h
+INC_FILES = -I libft
 
 SRC = $(addsuffix .c,$(SRCS))
 BSRC = $(addsuffix .c,$(BONUS_SRCS))
@@ -35,19 +37,23 @@ NAME = push_swap
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) -o $@ $(OBJ)
+	make -C libft bonus
+	$(CC) -o $@ $(OBJ) libft/libft.a
 
 %.o: %.c
-	$(CC) -c $< -o $@ $(CCFLAGS)
+	$(CC) -c -o $@ $< $(CCFLAGS) $(INC_FILES)
 
 bonus : all
 
 clean :
+	make -C libft clean
 	rm -rf $(OBJ) $(BOBJ)
 
 fclean : clean
+	make -C libft fclean
 	rm -rf $(NAME)
 
-re : fclean all
+re : fclean
+	make
 
 .PHONY : all bonus clean fclean re

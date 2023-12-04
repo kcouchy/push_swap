@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ftlib_lstnew.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/24 13:43:41 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/12/04 16:01:57 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+t_lblst	*ftlib_lstnew(void *content)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	t_lblst	*add2list;
+
+	add2list = malloc(sizeof(t_lblst));
+	if (add2list)
+	{
+		add2list->content = content;
+		add2list->next = NULL;
+	}
+	return (add2list);
 }

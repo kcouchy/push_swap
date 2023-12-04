@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/24 10:53:32 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/24 11:37:38 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	write(1, "Error\n", 6);
-	return (1);
+	unsigned int	i;
+	char			*output;
+
+	i = 0;
+	output = malloc ((ft_strlen(s) + 1) * sizeof(char));
+	if (!output)
+		return (NULL);
+	while (s[i])
+	{
+		output[i] = f(i, s[i]);
+		i++;
+	}
+	output [i] = '\0';
+	return (output);
 }

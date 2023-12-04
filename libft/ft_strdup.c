@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/19 10:50:57 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/19 11:37:25 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+char	*ft_strdup(const char *s)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	char	*output;
+
+	output = malloc(ft_strlen(s) + 1);
+	if (output == NULL)
+		return (NULL);
+	ft_strlcpy(output, s, ft_strlen(s) + 1);
+	return (output);
 }
+
+/*
+int	main(void)
+{
+	const char	s[]="copy me";
+	const char	*output;
+
+	output = ft_strdup(s);
+	printf("%s\n", s);
+	printf("%s\n", output);
+//	printf("%s\n", strdup(s));
+	free((void *)output);
+	return (0);
+}
+*/

@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/17 15:50:27 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/17 16:13:42 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+void	ft_bzero(void *s, size_t n)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	ft_memset(s, 0, n);
 }
+
+/*
+int	main(void)
+{
+	char temp[] = "This ista test";
+	int len = 6;
+
+	ft_bzero(temp, len);
+	printf("%s", temp);
+	return (0);
+}
+*/
+//prints nothing because it's all void

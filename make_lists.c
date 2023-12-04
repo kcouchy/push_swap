@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:02:24 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/01 12:09:56 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:06:10 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_lstclear(t_list **lst)
 	while (*lst)
 	{
 		temp = (*lst)->next;
-		free(lst);
+		free(*lst);
 		*lst = temp;
 	}
 }

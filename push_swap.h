@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/01 17:06:40 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:09:32 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 /* Includes                                                                   */
 /******************************************************************************/
 
-# include <stdlib.h>	/*malloc/free/calloc && exit etc*/
-# include <unistd.h>	/*write*/
-# include <stdio.h>		/*printf*/
+# include <stdlib.h>		/*malloc/free/calloc && exit etc*/
+# include <unistd.h>		/*write*/
+# include "libft/libft.h"	/*includes my libft.h*/
 
 /******************************************************************************/
 /* Structures                                                                 */
@@ -52,7 +52,7 @@ int		is_not_num(int argc, char **argv);
  * @return long returns number is a valid int, otherwise returns -2147483649 
  * (beyond min int so invalid).
  */
-long	ft_atoi(char *argv);
+long	ftps_atoi(char *argv);
 
 /**
  * @brief takes the inputs and checks for duplicates
@@ -117,22 +117,11 @@ void	ft_lstclear(t_list **lst);
 
 /**
  * @brief Iterates the list ’lst’ and applies the function ’f’ on the content 
- * of each node. Creates a new list resulting of the successive applications 
- * of the function ’f’. The ’del’ function is used to delete the content of a 
- * node if needed.
- * @param lst The address of a pointer to a node.
- * @param f The address of the function used to iterate on the list.
- * @return t_list* Pointer to the head of the new list.
- */
-t_list	*ft_lstmap(t_list *lst, int(*f)(int));
-
-/**
- * @brief Iterates the list ’lst’ and applies the function ’f’ on the content 
  * of each node.
  * @param lst The address of a pointer to a node.
  * @param f The address of the function used to iterate on the list.
  */
-void	ft_lstiter(t_list *lst, int(*f)(int));
+void	ft_lstiter(t_list *lst, void (*f)(int *));
 
 /**
  * @brief Returns the last node of the list.
@@ -165,39 +154,84 @@ void	push_swap(int argc, char **argv);
 /******************************************************************************/
 
 /**
- * @brief does the work of sa (swap a) and sb (swap b): 
+ * @brief does the work of sa (swap a) or sb (swap b): 
  * Swap the first 2 elements at the top of stack a or b.
  * Does nothing if there is only one or no elements in the stack (ft_lstsize).
  * @param list pointer to the head of the stack to swap
  * @param a_b stack name for output (sa\n or sb\n)
- * @return t_list* pointer to the head of the stack, swapped
+ * @return 0 is there was a swap, 1 if no swap (<= 1 elements in stack)
  */
-t_list	*ft_swap2(t_list *list, char a_b);
+int		ft_sa_sb(t_list *list, char a_b);
 
-// ss : sa and sb at the same time.
+/**
+ * @brief does the work of pa (push a) or pb (push b):
+ * Take the first element at the top of source_list and put it at the top of 
+ * target_list.
+ * Does nothing if b is empty.
+ * @param source_list double pointer to the head of the source list
+ * @param target_list double pointer to the head of the target list
+ * @param a_b the push target list for output (pa\n or pb\n)
+ * @return 0 is there was a swap, 1 if no swap (source_list has no elements) 
+ */
+int		ft_pa_pb(t_list **source_list, t_list **target_list, char a_b);
 
-// pa (push a): Take the first element at the top of b and put it at the top of 
-// a.
-// Do nothing if b is empty.
+/**
+ * @brief does the work of ra (rotate a) or rb (rotate b):
+ * Shift up all elements of stack list by 1.
+ * The first element becomes the last one.
+ * Does nothing if stack is empty or contains only 1 element.
+ * @param list double pointer to the head of the target list
+ * @param a_b stack name for output (ra\n or rb\n)
+ * @return int 
+ */
+int		ft_ra_rb(t_list **list, char a_b);
 
-// pb (push b): Take the first element at the top of a and put it at the top of 
-// b.
-// Do nothing if a is empty.
+/**
+ * @brief does the work of rra (reverse rotate a) or rrb (reverse rotate b):
+ * Shift down all elements of stack list by 1.
+ * The last element becomes the first one.
+ * Does nothing if stack is empty or contains only 1 element.
+ * @param list double pointer to the head of the target list
+ * @param a_b stack name for output (ra\n or rb\n)
+ * @return int 
+ */
+int		ft_rra_rrb(t_list **list, char a_b);
 
-// ra (rotate a): Shift up all elements of stack a by 1.
-// The first element becomes the last one.
+/******************************************************************************/
+/* Combined Sorting Operations                                                */
+/******************************************************************************/
 
-// rb (rotate b): Shift up all elements of stack b by 1.
-// The first element becomes the last one.
+/**
+ * @brief does the work of sa (swap a) and sb (swap b) at the same time: 
+ * Swap the first 2 elements at the top of stack a and b.
+ * Does nothing if there is only one or no elements in either stack (ft_lstsize)
+ * @param a_list pointer to the head of the a_stack to swap
+ * @param b_list pointer to the head of the b_stack to swap
+ * @return 0 if there was a swap for both, 1 if no swap (<= 1 elements in stack)
+ */
+int		ft_ss(t_list *a_list, t_list *b_list);
 
-// rr : ra and rb at the same time.
+/**
+ * @brief does the work of ra (rotate a) and rb (rotate b) at the same time:
+ * Shift up all elements of stack a_list and b_list by 1.
+ * The first element becomes the last one.
+ * Does nothing if either stack is empty or contains only 1 element.
+ * @param a_list double pointer to the head of the target a_list
+ * @param b_list double pointer to the head of the target b_list
+ * @return 0 if there was a rotation for both, 1 if not (<= 1 elements in stack)
+ */
+int		ft_rr(t_list **a_list, t_list **b_list);
 
-// rra (reverse rotate a): Shift down all elements of stack a by 1.
-// The last element becomes the first one.
-
-// rrb (reverse rotate b): Shift down all elements of stack b by 1.
-// The last element becomes the first one.
-
-// rrr : rra and rrb at the same time.
+/**
+ * @brief does the work of rra (reverse rotate a) and rrb (reverse rotate b) at 
+ * the same time:
+ * Shift down all elements of stack a_list and b_list by 1.
+ * The last element becomes the first one.
+ * Does nothing if either stack is empty or contains only 1 element.
+ * @param a_list double pointer to the head of the target a_list
+ * @param b_list double pointer to the head of the target b_list
+ * @return 0 if there was a rotation for both, 1 if not (<= 1 elements in stack)
+ */
+int		ft_rrr(t_list **a_list, t_list **b_list);
 
 #endif

@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 09:21:47 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:05:53 by kcouchma         ###   ########.fr       */
+/*   Created: 2023/10/19 10:25:37 by kcouchma          #+#    #+#             */
+/*   Updated: 2023/10/24 11:05:58 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_error(void)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	write(1, "Error\n", 6);
-	return (1);
+	void	*output;
+
+	output = malloc(nmemb * size);
+	if (output == NULL)
+		return (NULL);
+	ft_bzero(output, (nmemb * size));
+	return (output);
 }
+
+/*
+ft_memset(output, 65, nmemb*size); //to test, replace bzero
+int	main(void)
+{
+	printf("%s\n", (char *)ft_calloc(5, 2));
+	return (0);
+}
+*/
