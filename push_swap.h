@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:09:32 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:04:24 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 typedef struct s_list
 {
 	int				num;
-//	int				depth;
 	struct s_list	*next;
 }					t_list;
 
@@ -116,6 +115,13 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst);
 
 /**
+ * @brief Copies a list node by node.
+ * @param lst The address of a pointer to a node.
+ * @return t_list* duplicate list
+ */
+t_list	*ft_lstmap(t_list *lst);
+
+/**
  * @brief Iterates the list ’lst’ and applies the function ’f’ on the content 
  * of each node.
  * @param lst The address of a pointer to a node.
@@ -138,18 +144,6 @@ t_list	*ft_lstlast(t_list *lst);
 int		ft_lstsize(t_list *lst);
 
 /******************************************************************************/
-/* Main Functions                                                             */
-/******************************************************************************/
-
-/**
- * @brief Main function
- * 
- * @param argc input
- * @param argv input
- */
-void	push_swap(int argc, char **argv);
-
-/******************************************************************************/
 /* Sorting Operations                                                         */
 /******************************************************************************/
 
@@ -167,7 +161,7 @@ int		ft_sa_sb(t_list *list, char a_b);
  * @brief does the work of pa (push a) or pb (push b):
  * Take the first element at the top of source_list and put it at the top of 
  * target_list.
- * Does nothing if b is empty.
+ * Does nothing if source_list is empty.
  * @param source_list double pointer to the head of the source list
  * @param target_list double pointer to the head of the target list
  * @param a_b the push target list for output (pa\n or pb\n)
@@ -233,5 +227,66 @@ int		ft_rr(t_list **a_list, t_list **b_list);
  * @return 0 if there was a rotation for both, 1 if not (<= 1 elements in stack)
  */
 int		ft_rrr(t_list **a_list, t_list **b_list);
+
+/******************************************************************************/
+/* push_swap_utils.c                                                          */
+/******************************************************************************/
+
+/**
+ * @brief Utility to print a list to the standard output to check progress.
+ * @param stack pointer to a list to print.
+ */
+void	print_list(t_list *stack);
+
+/**
+ * @brief Swaps the value ->num of two t_list pointers.
+ * @param stack1 first pointer to swap.
+ * @param stack2 second pointer to swap.
+ */
+void	swap_nums(t_list *stack1, t_list *stack2);
+
+/**
+ * @brief Checks the list pairwise to see if it is in ascending order.
+ * @param stack pointer to a list to check.
+ * @return int 0 if correctly sorted, 1 if an unsorted pair is found.
+ */
+int		ft_check_list(t_list *stack);
+
+/**
+ * @brief Find the median value of a stack. If there is an even number of 
+ * elements, returns the larger median value.
+ * @param a_stack pointer to a list to check.
+ * @return int median value of the list.
+ */
+int		ft_findpivot(t_list *a_stack);
+
+/******************************************************************************/
+/* Main Functions                                                             */
+/******************************************************************************/
+
+/**
+ * @brief Converts inputs into a linked list (t_list), stored under ->num
+ * 
+ * @param argc input
+ * @param argv input
+ * @return t_list* created list, NULL if malloc fails.
+ */
+t_list	*ft_makelist(int argc, char **argv);
+
+/**
+ * @brief Sorts list and generates output when the input consists of 2 or 3 
+ * elements.
+ * @param a_stack input stack once checked
+ */
+void	ft_simple_sort(t_list *a_stack);
+
+/**
+ * @brief Main function
+ * 
+ * @param argc input
+ * @param argv input
+ * @return 0 if ok, 1 in case of error
+ */
+int		push_swap(int argc, char **argv);
 
 #endif

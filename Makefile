@@ -6,7 +6,7 @@
 #    By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 10:04:34 by kcouchma          #+#    #+#              #
-#    Updated: 2023/12/04 15:38:12 by kcouchma         ###   ########.fr        #
+#    Updated: 2023/12/05 15:09:29 by kcouchma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS =								\
 				make_lists			\
 				mod_lists			\
 				sorting				\
-				sorting_combi
+				sorting_combi		\
+				push_swap_utils
 
 BONUS_SRCS =						\
 				
