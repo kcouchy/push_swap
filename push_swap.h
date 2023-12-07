@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/05 18:04:24 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/06 17:17:16 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,19 +107,20 @@ void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 
 /**
- * @brief Deletes and frees the given node and every successor of that node, 
- * using the function ’del’ and free(3). Finally, the pointer to the list 
- * must be set to NULL.
- * @param lst The address of a pointer to a node.
- */
-void	ft_lstclear(t_list **lst);
-
-/**
  * @brief Copies a list node by node.
  * @param lst The address of a pointer to a node.
  * @return t_list* duplicate list
  */
 t_list	*ft_lstmap(t_list *lst);
+
+/**
+ * @brief Converts inputs into a linked list (t_list), stored under ->num
+ * 
+ * @param argc input
+ * @param argv input
+ * @return t_list* created list, NULL if malloc fails.
+ */
+t_list	*ft_makelist(int argc, char **argv);
 
 /**
  * @brief Iterates the list ’lst’ and applies the function ’f’ on the content 
@@ -142,6 +143,20 @@ t_list	*ft_lstlast(t_list *lst);
  * @return int The length of the list.
  */
 int		ft_lstsize(t_list *lst);
+
+/**
+ * @brief Deletes and frees the given node and every successor of that node, 
+ * using the function ’del’ and free(3). Finally, the pointer to the list 
+ * must be set to NULL.
+ * @param lst The address of a pointer to a node.
+ */
+void	ft_lstclear(t_list **lst);
+
+/**
+ * @brief Deletes and frees the last node of the input list.
+ * @param lst Address of a pointer to the beginning of the list.
+ */
+void	ft_del_last(t_list **lst);
 
 /******************************************************************************/
 /* Sorting Operations                                                         */
@@ -235,8 +250,9 @@ int		ft_rrr(t_list **a_list, t_list **b_list);
 /**
  * @brief Utility to print a list to the standard output to check progress.
  * @param stack pointer to a list to print.
+ * @param name name to print before the contents.
  */
-void	print_list(t_list *stack);
+void	print_list(t_list *stack, char *name);
 
 /**
  * @brief Swaps the value ->num of two t_list pointers.
@@ -253,8 +269,16 @@ void	swap_nums(t_list *stack1, t_list *stack2);
 int		ft_check_list(t_list *stack);
 
 /**
- * @brief Find the median value of a stack. If there is an even number of 
- * elements, returns the larger median value.
+ * @brief Takes a list, duplicates it using ft_lstmap, then sorts the duplicate.
+ * @param stack pointer to a list to copy and sort.
+ * @return t_list* duplicate of the input stack.
+ */
+t_list	*ft_sort_stack(t_list *stack);
+
+/**
+ * @brief Find the median value of a stack - duplicated and sorted using 
+ * ft_sort_stack. If there is an even number of elements, 
+ * returns the larger median value.
  * @param a_stack pointer to a list to check.
  * @return int median value of the list.
  */
@@ -265,15 +289,6 @@ int		ft_findpivot(t_list *a_stack);
 /******************************************************************************/
 
 /**
- * @brief Converts inputs into a linked list (t_list), stored under ->num
- * 
- * @param argc input
- * @param argv input
- * @return t_list* created list, NULL if malloc fails.
- */
-t_list	*ft_makelist(int argc, char **argv);
-
-/**
  * @brief Sorts list and generates output when the input consists of 2 or 3 
  * elements.
  * @param a_stack input stack once checked
@@ -281,12 +296,22 @@ t_list	*ft_makelist(int argc, char **argv);
 void	ft_simple_sort(t_list *a_stack);
 
 /**
- * @brief Main function
+ * @brief 
  * 
+ */
+int		push_swap(t_list **a_stack, t_list **b_stack);
+
+/**
+ * @brief Main function - checks there are >1 inputs, that they are valid 
+ * integers within int range,
+ * Constructs the a_stack, initialises the b_stack. 
+ * If the stack is already sorted, returns. 
+ * If the stack is 2 or 3 elements, sorts it then returns.
+ * Otherwise calls push_swap to sort the stack.
  * @param argc input
  * @param argv input
  * @return 0 if ok, 1 in case of error
  */
-int		push_swap(int argc, char **argv);
+int		main(int argc, char **argv);
 
 #endif

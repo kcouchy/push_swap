@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:02:24 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/05 17:14:51 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:58:30 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	*lst = new;
 }
 
-void	ft_lstclear(t_list **lst)
-{
-	t_list	*temp;
-
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		free(*lst);
-		*lst = temp;
-	}
-}
-
 t_list	*ft_lstmap(t_list *lst)
 {
 	t_list	*new_list;
@@ -70,4 +58,31 @@ t_list	*ft_lstmap(t_list *lst)
 		temp = temp->next;
 	}
 	return (new_list);
+}
+
+t_list	*ft_makelist(int argc, char **argv)
+{
+	t_list	*a_stack;
+	t_list	*temp;
+	int		i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (i == 1)
+		{
+			a_stack = ft_lstnew(ftps_atoi(argv[i]));
+			if (!a_stack)
+				return (a_stack);
+		}
+		else
+		{
+			temp = ft_lstnew(ftps_atoi(argv[i]));
+			if (!temp)
+				return (temp);
+			ft_lstadd_back(&a_stack, temp);
+		}
+		i++;
+	}
+	return (a_stack);
 }

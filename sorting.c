@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:55:02 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:07:18 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:20:14 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,17 @@ int	ft_pa_pb(t_list **source_list, t_list **target_list, char a_b)
 int	ft_ra_rb(t_list **list, char a_b)
 {
 	t_list	*temp;
+	int		list_size;
 
 	temp = (*list)->next;
-	if (ft_lstsize(*list) <= 1)
+	list_size = ft_lstsize(*list);
+	if (list_size <= 1)
 		return (1);
+	if (list_size == 2)
+	{
+		ft_sa_sb(*list, a_b);
+		return (0);
+	}
 	else
 	{
 		ft_lstadd_back(&temp, *list);
@@ -62,11 +69,18 @@ int	ft_rra_rrb(t_list **list, char a_b)
 {
 	t_list	*temp;
 	t_list	**end;
+	int		list_size;
 
 	temp = *list;
 	end = list;
-	if (ft_lstsize(*list) <= 1)
+	list_size = ft_lstsize(*list);
+	if (list_size <= 1)
 		return (1);
+	if (list_size == 2)
+	{
+		ft_sa_sb(*list, a_b);
+		return (0);
+	}
 	else
 	{
 		while (temp->next)

@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/05 18:57:42 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:24:18 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,6 @@
 // 	ft_lstclear(&b_stack);
 // }
 
-t_list	*ft_makelist(int argc, char **argv)
-{
-	t_list	*a_stack;
-	t_list	*temp;
-	int		i;
-
-	i = 1;
-	while (i < argc)
-	{
-		if (i == 1)
-		{
-			a_stack = ft_lstnew(ftps_atoi(argv[i]));
-			if (!a_stack)
-				return (a_stack);
-		}
-		else
-		{
-			temp = ft_lstnew(ftps_atoi(argv[i]));
-			if (!temp)
-				return (temp);
-			ft_lstadd_back(&a_stack, temp);
-		}
-		i++;
-	}
-	return (a_stack);
-}
-
 void	ft_simple_sort(t_list *a_stack)
 {
 	int	i;
@@ -111,58 +84,130 @@ void	ft_simple_sort(t_list *a_stack)
 	return;
 }
 
-void	quick_sort_a(t_list **a_stack, t_list **b_stack, int pivot, int len)
+int		ft_depth(t_list *b_stack, int num)
 {
-	if (len > 3)
+	int	depth;
+
+	depth = 0;
+	while (b_stack)
 	{
-		if ((*a_stack)->num < pivot)
-			ft_pa_pb(a_stack, b_stack, 'b');
-		else
-			ft_ra_rb(a_stack, 'a');
-		quick_sort_a(a_stack, b_stack, ft_findpivot(*a_stack), ft_lstsize(*a_stack));
+		if (b_stack->num == num)
+			break ;
+		b_stack = b_stack->next;
+		depth++;
 	}
-	return (ft_simple_sort(*a_stack));
-	
+	return (depth);
 }
-void	ft_sort(t_list *a_stack, t_list *b_stack)
+
+void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 {
 	int	pivot;
 	int	a_list_len;
 
-	pivot = 0;
-	a_list_len = ft_lstsize(a_stack);
-	while (ft_lstsize(a_stack) > 3)
+	a_list_len = ft_lstsize(*a_stack);
+	while(a_list_len > 2)
 	{
-		pivot = ft_findpivot(a_stack);
-		quick_sort_a(&a_stack, &b_stack, pivot, a_list_len);
-		print_list(a_stack);
-		print_list(b_stack);
+		pivot = ft_findpivot(*a_stack);
+		while (a_list_len > 0)
+		{
+			if ((*a_stack)->num < pivot)
+				ft_pa_pb(a_stack, b_stack, 'b');
+			else
+				ft_ra_rb(a_stack, 'a');
+			a_list_len--;
+		}
+		a_list_len = ft_lstsize(*a_stack);
 	}
+	ft_pa_pb(a_stack, b_stack, 'b');
+	ft_pa_pb(a_stack, b_stack, 'b');
+	return ;
 }
 
-int	push_swap(int argc, char **argv)
+void	quicksort_b2a(t_list **a_stack, t_list **b_stack, t_list **b_sort)
 {
-	t_list	*a_stack;
-	t_list	*b_stack;
+	t_list	*last_b;
+	int		b_stack_size;
+	int		depth;
+	int		rdepth;
 
-	if (ft_checkinputs(argc, argv) == 1)
-		return (1);
-	a_stack = ft_makelist(argc, argv);
-	if (!a_stack)
-		return ft_error();
-	b_stack = NULL;
-	//print_tests(a_stack, b_stack);
-	if (ft_check_list(a_stack) == 0)
-		return (0);
-	if (argc <= 4)
-		return (ft_simple_sort(a_stack), 0);
-	else
-	ft_sort(a_stack, b_stack);
+	b_stack_size = ft_lstsize(*b_stack);
+	while (b_stack_size > 0)
+	{
+		if (ft_lstsize(*b_stack) == 1)
+		{
+			ft_pa_pb(b_stack, a_stack, 'a');
+			break;
+		}
+		if (ft_lstsize(*b_stack) == 2)
+		{
+			if ((*b_stack)->num > (*b_stack)->next->num)
+				ft_sa_sb(*b_stack, 'b');
+			ft_pa_pb(b_stack, a_stack, 'a');
+			break;
+		}
+		last_b = ft_lstlast(*b_sort);
+		depth = ft_depth(*b_stack, last_b->num);
+		if (depth < (ft_lstsize(*b_stack) / 2))
+		{
+			while (depth > 0)
+			{
+				ft_ra_rb(b_stack, 'b');
+				depth--;
+			}
+		}
+		else
+		{
+			rdepth = ft_lstsize(*b_stack) - depth;
+			while (rdepth > 0)
+			{
+				ft_rra_rrb(b_stack, 'b');
+				rdepth--;
+			}
+		}
+		ft_pa_pb(b_stack, a_stack, 'a');
+		ft_del_last(b_sort);
+		b_stack_size--;
+	}
+	ft_pa_pb(b_stack, a_stack, 'a');
+	ft_lstclear(b_sort);
+}
+
+int	push_swap(t_list **a_stack, t_list **b_stack)
+{
+	t_list *b_sort;
+
+	// ft_printf("quicksort_a2b\n");
+	quicksort_a2b(a_stack, b_stack);
+	// print_list(*a_stack, "a");
+	// print_list(*b_stack, "b");
+	b_sort = ft_sort_stack(*b_stack);
+	// ft_printf("quicksort_b2a\n");
+	quicksort_b2a(a_stack, b_stack, &b_sort);
+	// print_list(*a_stack, "a");
+	// print_list(*b_stack, "b");
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	push_swap(argc, argv);
+	t_list	*a_stack;
+	t_list	*b_stack;
+
+	if (argc <= 2)
+		return (ft_error());
+	if (ft_checkinputs(argc, argv) == 1)
+		return (1);
+	a_stack = ft_makelist(argc, argv);
+	if (!a_stack)
+		return (ft_error());
+	b_stack = NULL;
+	// print_tests(a_stack, b_stack);
+	if (ft_check_list(a_stack) == 0)
+		return (0);
+	if (argc <= 4)
+		return (ft_simple_sort(a_stack), 0);
+	else
+	push_swap(&a_stack, &b_stack);
+	free(a_stack);
 	return (0);
 }

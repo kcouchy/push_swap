@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:14:56 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/04 16:06:51 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:50:01 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,26 @@ int	ft_lstsize(t_list *lst)
 		lst = lst->next;
 	}
 	return (lst_len);
+}
+
+void	ft_lstclear(t_list **lst)
+{
+	t_list	*temp;
+
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		free(*lst);
+		*lst = temp;
+	}
+}
+
+void	ft_del_last(t_list **lst_ptr)
+{
+	if (*lst_ptr == NULL)
+		return ;
+	while ((*lst_ptr)->next)
+		lst_ptr = &(*lst_ptr)->next;
+	free(*lst_ptr);
+	*lst_ptr = NULL;
 }
