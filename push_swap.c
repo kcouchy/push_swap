@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 11:24:18 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:37:51 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,18 +133,6 @@ void	quicksort_b2a(t_list **a_stack, t_list **b_stack, t_list **b_sort)
 	b_stack_size = ft_lstsize(*b_stack);
 	while (b_stack_size > 0)
 	{
-		if (ft_lstsize(*b_stack) == 1)
-		{
-			ft_pa_pb(b_stack, a_stack, 'a');
-			break;
-		}
-		if (ft_lstsize(*b_stack) == 2)
-		{
-			if ((*b_stack)->num > (*b_stack)->next->num)
-				ft_sa_sb(*b_stack, 'b');
-			ft_pa_pb(b_stack, a_stack, 'a');
-			break;
-		}
 		last_b = ft_lstlast(*b_sort);
 		depth = ft_depth(*b_stack, last_b->num);
 		if (depth < (ft_lstsize(*b_stack) / 2))
@@ -168,7 +156,6 @@ void	quicksort_b2a(t_list **a_stack, t_list **b_stack, t_list **b_sort)
 		ft_del_last(b_sort);
 		b_stack_size--;
 	}
-	ft_pa_pb(b_stack, a_stack, 'a');
 	ft_lstclear(b_sort);
 }
 
@@ -176,6 +163,7 @@ int	push_swap(t_list **a_stack, t_list **b_stack)
 {
 	t_list *b_sort;
 
+	// print_list(*a_stack, "a");
 	// ft_printf("quicksort_a2b\n");
 	quicksort_a2b(a_stack, b_stack);
 	// print_list(*a_stack, "a");
@@ -194,7 +182,7 @@ int	main(int argc, char **argv)
 	t_list	*b_stack;
 
 	if (argc <= 2)
-		return (ft_error());
+		return (0);
 	if (ft_checkinputs(argc, argv) == 1)
 		return (1);
 	a_stack = ft_makelist(argc, argv);

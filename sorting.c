@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:55:02 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 11:20:14 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 13:22:49 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ int	ft_ra_rb(t_list **list, char a_b)
 	if (list_size <= 1)
 		return (1);
 	if (list_size == 2)
-	{
-		ft_sa_sb(*list, a_b);
-		return (0);
-	}
+		return (ft_sa_sb(*list, a_b));
 	else
 	{
 		ft_lstadd_back(&temp, *list);
@@ -77,10 +74,7 @@ int	ft_rra_rrb(t_list **list, char a_b)
 	if (list_size <= 1)
 		return (1);
 	if (list_size == 2)
-	{
-		ft_sa_sb(*list, a_b);
-		return (0);
-	}
+		return (ft_sa_sb(*list, a_b));
 	else
 	{
 		while (temp->next)
