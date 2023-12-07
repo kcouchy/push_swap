@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 16:50:05 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:05:52 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,7 +307,7 @@ int		ft_depth(t_list *stack, int num);
  * @brief 
  * 
  */
-int		push_swap(t_list **a_stack, t_list **b_stack);
+// int		push_swap(t_list **a_stack, t_list **b_stack);
 
 /**
  * @brief Main function - checks there are >1 inputs, that they are valid 

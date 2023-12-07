@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 16:50:04 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 17:10:42 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 	while(a_list_len > 3)
 	{
 		pivot = ft_findpivot(*a_stack);
-		while (a_list_len > 3)
+		while (a_list_len > 0)
 		{
 			if ((*a_stack)->num < pivot)
 				ft_pa_pb(a_stack, b_stack, 'b');
@@ -159,27 +159,28 @@ void	quicksort_b2a(t_list **a_stack, t_list **b_stack, t_list **b_sort)
 	ft_lstclear(b_sort);
 }
 
-int	push_swap(t_list **a_stack, t_list **b_stack)
-{
-	t_list *b_sort;
+// int	push_swap(t_list **a_stack, t_list **b_stack)
+// {
+// 	t_list *b_sort;
 
-	// print_list(*a_stack, "a");
-	// ft_printf("quicksort_a2b\n");
-	quicksort_a2b(a_stack, b_stack);
-	// print_list(*a_stack, "a");
-	// print_list(*b_stack, "b");
-	b_sort = ft_sort_stack(*b_stack);
-	// ft_printf("quicksort_b2a\n");
-	quicksort_b2a(a_stack, b_stack, &b_sort);
-	// print_list(*a_stack, "a");
-	// print_list(*b_stack, "b");
-	return (0);
-}
+// 	// print_list(*a_stack, "a");
+// 	// ft_printf("quicksort_a2b\n");
+// 	quicksort_a2b(a_stack, b_stack);
+// 	// print_list(*a_stack, "a");
+// 	// print_list(*b_stack, "b");
+// 	b_sort = ft_sort_stack(*b_stack);
+// 	// ft_printf("quicksort_b2a\n");
+// 	quicksort_b2a(a_stack, b_stack, &b_sort);
+// 	// print_list(*a_stack, "a");
+// 	// print_list(*b_stack, "b");
+// 	return (0);
+// }
 
 int	main(int argc, char **argv)
 {
 	t_list	*a_stack;
 	t_list	*b_stack;
+	t_list *b_sort;
 
 	if (argc <= 2)
 		return (0);
@@ -194,8 +195,9 @@ int	main(int argc, char **argv)
 		return (0);
 	if (argc <= 4)
 		return (ft_simple_sort(&a_stack), 0);
-	else
-	push_swap(&a_stack, &b_stack);
+	quicksort_a2b(&a_stack, &b_stack);
+	b_sort = ft_sort_stack(b_stack);
+	quicksort_b2a(&a_stack, &b_stack, &b_sort);
 	free(a_stack);
 	return (0);
 }
