@@ -6,20 +6,11 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:14:56 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/06 16:50:01 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:43:56 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_lstiter(t_list *lst, void (*f)(int *))
-{
-	while (lst)
-	{
-		f(&lst->num);
-		lst = lst->next;
-	}
-}
 
 t_list	*ft_lstlast(t_list *lst)
 {

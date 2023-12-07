@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/06 17:17:16 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:50:05 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,15 @@ int		is_not_num(int argc, char **argv);
 long	ftps_atoi(char *argv);
 
 /**
- * @brief takes the inputs and checks for duplicates
+ * @brief Compares two strings character by character, returns the difference.
+ * @param s1 pointer to the first input string to compare
+ * @param s2 pointer to the other input string to compare
+ * @return int the difference, if any, between the two strings
+ */
+int	ft_strcmp(const char *s1, const char *s2);
+
+/**
+ * @brief takes the inputs and checks for duplicates using ft_strcmp
  * @param argc input
  * @param argv input
  * @return int returns 0 if all ints are unique, otherwise error() 
@@ -63,7 +71,7 @@ long	ftps_atoi(char *argv);
 int		is_dup(int argc, char **argv);
 
 /**
- * @brief Runs all of the above check functions to make sure the input is valid
+ * @brief Runs all of the above check functions to make sure the input is valid.
  * @param argc input
  * @param argv input
  * @return int returns 0 if all argv are fine, otherwise 1.
@@ -95,40 +103,32 @@ t_list	*ft_lstnew(int num);
 /**
  * @brief Adds the node ’new’ at the beginning of the list. *lst 
  * @param lst The address of a pointer to the first link of a list.
- * @param new The address of a pointer to the node to be added to the list.
+ * @param new A pointer to the node to be added to the list.
  */
 void	ft_lstadd_front(t_list **lst, t_list *new);
 
 /**
  * @brief Adds the node ’new’ at the end of the list.
  * @param lst The address of a pointer to the first link of a list.
- * @param new The address of a pointer to the node to be added to the list.
+ * @param new A pointer to the node to be added to the list.
  */
 void	ft_lstadd_back(t_list **lst, t_list *new);
 
 /**
- * @brief Copies a list node by node.
- * @param lst The address of a pointer to a node.
- * @return t_list* duplicate list
+ * @brief Duplicates and mallocs a list node by node.
+ * @param lst A pointer to the first link of a list.
+ * @return t_list* A pointer to the first link of the duplicate list.
  */
 t_list	*ft_lstmap(t_list *lst);
 
 /**
- * @brief Converts inputs into a linked list (t_list), stored under ->num
- * 
+ * @brief Converts inputs from the standard input into a linked list (t_list), 
+ * with the value stored in the variable ->num.
  * @param argc input
  * @param argv input
  * @return t_list* created list, NULL if malloc fails.
  */
 t_list	*ft_makelist(int argc, char **argv);
-
-/**
- * @brief Iterates the list ’lst’ and applies the function ’f’ on the content 
- * of each node.
- * @param lst The address of a pointer to a node.
- * @param f The address of the function used to iterate on the list.
- */
-void	ft_lstiter(t_list *lst, void (*f)(int *));
 
 /**
  * @brief Returns the last node of the list.
@@ -293,7 +293,15 @@ int		ft_findpivot(t_list *a_stack);
  * elements.
  * @param a_stack input stack once checked
  */
-void	ft_simple_sort(t_list *a_stack);
+void	ft_simple_sort(t_list **a_stack);
+
+/**
+ * @brief Finds the index of the number 'num' in the linked list 'stack'
+ * @param b_stack Pointer to the first link in a list.
+ * @param num The number to find.
+ * @return int Index of the location, will be lstsize if not found.
+ */
+int		ft_depth(t_list *stack, int num);
 
 /**
  * @brief 

@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 13:37:51 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:50:04 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,33 @@
 // 	ft_lstclear(&b_stack);
 // }
 
-void	ft_simple_sort(t_list *a_stack)
+void	ft_simple_sort(t_list **a_stack)
 {
 	int	i;
 
 	i = 0;
-	if (a_stack->num > a_stack->next->num)
-		ft_sa_sb(a_stack, 'a');
-	if ((ft_lstsize(a_stack) == 3) && 
-		(a_stack->next->num > a_stack->next->next->num))
+	if ((*a_stack)->num > (*a_stack)->next->num)
+		ft_sa_sb(*a_stack, 'a');
+	if ((ft_lstsize(*a_stack) == 3) && 
+		((*a_stack)->next->num > (*a_stack)->next->next->num))
 	{
-		ft_rra_rrb(&a_stack, 'a');
-		if (a_stack->num > a_stack->next->num)
-				ft_sa_sb(a_stack, 'a');
+		ft_rra_rrb(a_stack, 'a');
+		if ((*a_stack)->num > (*a_stack)->next->num)
+				ft_sa_sb(*a_stack, 'a');
 	}
 	return;
 }
 
-int		ft_depth(t_list *b_stack, int num)
+int		ft_depth(t_list *stack, int num)
 {
 	int	depth;
 
 	depth = 0;
-	while (b_stack)
+	while (stack)
 	{
-		if (b_stack->num == num)
+		if (stack->num == num)
 			break ;
-		b_stack = b_stack->next;
+		stack = stack->next;
 		depth++;
 	}
 	return (depth);
@@ -105,10 +105,10 @@ void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 	int	a_list_len;
 
 	a_list_len = ft_lstsize(*a_stack);
-	while(a_list_len > 2)
+	while(a_list_len > 3)
 	{
 		pivot = ft_findpivot(*a_stack);
-		while (a_list_len > 0)
+		while (a_list_len > 3)
 		{
 			if ((*a_stack)->num < pivot)
 				ft_pa_pb(a_stack, b_stack, 'b');
@@ -118,8 +118,8 @@ void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 		}
 		a_list_len = ft_lstsize(*a_stack);
 	}
-	ft_pa_pb(a_stack, b_stack, 'b');
-	ft_pa_pb(a_stack, b_stack, 'b');
+	if (ft_check_list(*a_stack) != 0)
+		ft_simple_sort(a_stack);
 	return ;
 }
 
@@ -193,7 +193,7 @@ int	main(int argc, char **argv)
 	if (ft_check_list(a_stack) == 0)
 		return (0);
 	if (argc <= 4)
-		return (ft_simple_sort(a_stack), 0);
+		return (ft_simple_sort(&a_stack), 0);
 	else
 	push_swap(&a_stack, &b_stack);
 	free(a_stack);
