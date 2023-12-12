@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 17:05:52 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/12 15:14:00 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 typedef struct s_list
 {
+	int				index;
 	int				num;
 	struct s_list	*next;
 }					t_list;
@@ -158,6 +159,15 @@ void	ft_lstclear(t_list **lst);
  */
 void	ft_del_last(t_list **lst);
 
+/**
+ * @brief Fills in the index value for the linked list. Calls ft_sort_stack
+ * to make a sorted duplicate list, then applies the index value to the unsorted
+ * a_stack list.
+ * @param a_stack Address of a pointer to the beginning of the list.
+ * @return int returns ft_error() if error, 0 if all goes well.
+ */
+int	ft_addindex(t_list **a_stack);
+
 /******************************************************************************/
 /* Sorting Operations                                                         */
 /******************************************************************************/
@@ -276,9 +286,8 @@ int		ft_check_list(t_list *stack);
 t_list	*ft_sort_stack(t_list *stack);
 
 /**
- * @brief Find the median value of a stack - duplicated and sorted using 
- * ft_sort_stack. If there is an even number of elements, 
- * returns the larger median value.
+ * @brief Find the median num value of a stack using the index value.
+ * If there is an even number of elements, returns the larger median value.
  * @param a_stack pointer to a list to check.
  * @return int median value of the list.
  */

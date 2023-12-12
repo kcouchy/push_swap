@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:14:56 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 16:43:56 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/11 16:59:03 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,32 @@ void	ft_del_last(t_list **lst_ptr)
 		lst_ptr = &(*lst_ptr)->next;
 	free(*lst_ptr);
 	*lst_ptr = NULL;
+}
+
+int	ft_addindex(t_list **a_stack)
+{
+	t_list	*sorted;
+	t_list	*temp;
+	int		i;
+
+	i = 0;
+	sorted = ft_sort_stack(*a_stack);
+	if (!sorted)
+		return (ft_error());
+	temp = *a_stack;
+	while (sorted)
+	{
+		sorted->index = i;
+		temp = *a_stack;
+		while (temp)
+		{
+			if (temp->num == sorted->num)
+				temp->index = sorted->index;
+			temp = temp->next;
+		}
+		sorted = sorted->next;
+		i++;
+	}
+	free(sorted);
+	return (0);
 }
