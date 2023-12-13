@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 13:55:02 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/07 13:22:49 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/13 09:20:46 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 int	ft_sa_sb(t_list *list, char a_b)
 {
 	int		i;
+	int		j;
 
 	i = list->num;
+	j = list->index;
 	if (ft_lstsize(list) <= 1)
 		return (1);
 	list->num = list->next->num;
 	list->next->num = i;
+	list->index = list->next->index;
+	list->next->index = j;
 	ft_printf("s%c\n", a_b);
 	return (0);
 }

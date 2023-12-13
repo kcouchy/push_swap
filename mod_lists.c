@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:14:56 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/11 16:59:03 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:16:56 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ void	ft_lstclear(t_list **lst)
 	}
 }
 
-void	ft_del_last(t_list **lst_ptr)
-{
-	if (*lst_ptr == NULL)
-		return ;
-	while ((*lst_ptr)->next)
-		lst_ptr = &(*lst_ptr)->next;
-	free(*lst_ptr);
-	*lst_ptr = NULL;
-}
+// void	ft_del_last(t_list **lst_ptr)
+// {
+// 	if (*lst_ptr == NULL)
+// 		return ;
+// 	while ((*lst_ptr)->next)
+// 		lst_ptr = &(*lst_ptr)->next;
+// 	free(*lst_ptr);
+// 	*lst_ptr = NULL;
+// }
 
 int	ft_addindex(t_list **a_stack)
 {
@@ -80,6 +80,6 @@ int	ft_addindex(t_list **a_stack)
 		sorted = sorted->next;
 		i++;
 	}
-	free(sorted);
+	ft_lstclear(&sorted);
 	return (0);
 }

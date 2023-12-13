@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/12 15:14:00 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/13 10:32:30 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ long	ftps_atoi(char *argv);
  * @param s2 pointer to the other input string to compare
  * @return int the difference, if any, between the two strings
  */
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 
 /**
  * @brief takes the inputs and checks for duplicates using ft_strcmp
@@ -166,7 +166,7 @@ void	ft_del_last(t_list **lst);
  * @param a_stack Address of a pointer to the beginning of the list.
  * @return int returns ft_error() if error, 0 if all goes well.
  */
-int	ft_addindex(t_list **a_stack);
+int		ft_addindex(t_list **a_stack);
 
 /******************************************************************************/
 /* Sorting Operations                                                         */
