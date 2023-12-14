@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/13 10:32:30 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:24:30 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,6 @@ int		is_dup(int argc, char **argv);
 int		ft_checkinputs(int argc, char **argv);
 
 /******************************************************************************/
-/* errors.c                                                                   */
-/******************************************************************************/
-
-/**
- * @brief to add to the return line in case of error. Prints "Error\n" to the 
- * standard output.
- * @return int returns 1.
- */
-int		ft_error(void);
-
-/******************************************************************************/
 /* make&mod_lists.c                                                           */
 /******************************************************************************/
 
@@ -132,13 +121,6 @@ t_list	*ft_lstmap(t_list *lst);
 t_list	*ft_makelist(int argc, char **argv);
 
 /**
- * @brief Returns the last node of the list.
- * @param lst The beginning of the list.
- * @return t_list* Last node of the list.
- */
-t_list	*ft_lstlast(t_list *lst);
-
-/**
  * @brief Counts the number of nodes in a list.
  * @param lst The beginning of the list.
  * @return int The length of the list.
@@ -152,12 +134,6 @@ int		ft_lstsize(t_list *lst);
  * @param lst The address of a pointer to a node.
  */
 void	ft_lstclear(t_list **lst);
-
-/**
- * @brief Deletes and frees the last node of the input list.
- * @param lst Address of a pointer to the beginning of the list.
- */
-void	ft_del_last(t_list **lst);
 
 /**
  * @brief Fills in the index value for the linked list. Calls ft_sort_stack
@@ -217,52 +193,22 @@ int		ft_ra_rb(t_list **list, char a_b);
 int		ft_rra_rrb(t_list **list, char a_b);
 
 /******************************************************************************/
-/* Combined Sorting Operations                                                */
-/******************************************************************************/
-
-/**
- * @brief does the work of sa (swap a) and sb (swap b) at the same time: 
- * Swap the first 2 elements at the top of stack a and b.
- * Does nothing if there is only one or no elements in either stack (ft_lstsize)
- * @param a_list pointer to the head of the a_stack to swap
- * @param b_list pointer to the head of the b_stack to swap
- * @return 0 if there was a swap for both, 1 if no swap (<= 1 elements in stack)
- */
-int		ft_ss(t_list *a_list, t_list *b_list);
-
-/**
- * @brief does the work of ra (rotate a) and rb (rotate b) at the same time:
- * Shift up all elements of stack a_list and b_list by 1.
- * The first element becomes the last one.
- * Does nothing if either stack is empty or contains only 1 element.
- * @param a_list double pointer to the head of the target a_list
- * @param b_list double pointer to the head of the target b_list
- * @return 0 if there was a rotation for both, 1 if not (<= 1 elements in stack)
- */
-int		ft_rr(t_list **a_list, t_list **b_list);
-
-/**
- * @brief does the work of rra (reverse rotate a) and rrb (reverse rotate b) at 
- * the same time:
- * Shift down all elements of stack a_list and b_list by 1.
- * The last element becomes the first one.
- * Does nothing if either stack is empty or contains only 1 element.
- * @param a_list double pointer to the head of the target a_list
- * @param b_list double pointer to the head of the target b_list
- * @return 0 if there was a rotation for both, 1 if not (<= 1 elements in stack)
- */
-int		ft_rrr(t_list **a_list, t_list **b_list);
-
-/******************************************************************************/
 /* push_swap_utils.c                                                          */
 /******************************************************************************/
 
+// /**
+//  * @brief Utility to print a list to the standard output to check progress.
+//  * @param stack pointer to a list to print.
+//  * @param name name to print before the contents.
+//  */
+// void	print_list(t_list *stack, char *name);
+
 /**
- * @brief Utility to print a list to the standard output to check progress.
- * @param stack pointer to a list to print.
- * @param name name to print before the contents.
+ * @brief to add to the return line in case of error. Prints "Error\n" to the 
+ * standard output.
+ * @return int returns 1.
  */
-void	print_list(t_list *stack, char *name);
+int		ft_error(void);
 
 /**
  * @brief Swaps the value ->num of two t_list pointers.
@@ -294,7 +240,46 @@ t_list	*ft_sort_stack(t_list *stack);
 int		ft_findpivot(t_list *a_stack);
 
 /******************************************************************************/
-/* Main Functions                                                             */
+/* quick_sort_utils.c                                                         */
+/******************************************************************************/
+
+/**
+ * @brief Utility to rotate the given stack to bring the value stocked at 
+ * 'depth' to the top.
+ * @param stack input stack to search within and rotate.
+ * @param a_b identity of the stack for naming conventions ('a' or 'b').
+ * @param depth the current depth of the value within the stack.
+ * @param size the total size of the stack to rotate
+ * variable offset to ensure the utility works in both cases. 
+ */
+void	ft_turny(t_list **stack, char a_b, int depth, int size);
+
+/**
+ * @brief B2A Rotating A
+ * In order to the b2a function to work, the largest value must be present in 
+ * the a_stack. This function finds the biggest index (number) in b_stack, and 
+ * pushes it to a_stack.
+ * @param a_stack Target stack for the push.
+ * @param b_stack Stack containing all partially sorted values 
+ * (after quicksort a2b)
+ */
+void	ft_big2a(t_list **a_stack, t_list **b_stack);
+
+/**
+ * @brief B2A Rotating A
+ * Once the largest index (number) is in the a_stack, this function takes the 
+ * value on top of the b_stack, and finds the best position in a_stack to place 
+ * it. To do this, it finds the next biggest number in a_stack, and returns its
+ * position.
+ * @param a_stack the stack to search for the correct spot to transfer.
+ * @param index index in b_stack to find the closest (next largest) value to.
+ * @return int Returns the position in a_stack of the closest (next largest) 
+ * value to that at the top of b_stack.
+ */
+int	ft_closest(t_list *a_stack, int index);
+
+/******************************************************************************/
+/* Main Functions - push-swap.c                                               */
 /******************************************************************************/
 
 /**
@@ -302,21 +287,24 @@ int		ft_findpivot(t_list *a_stack);
  * elements.
  * @param a_stack input stack once checked
  */
-void	ft_simple_sort(t_list **a_stack);
-
-/**
- * @brief Finds the index of the number 'num' in the linked list 'stack'
- * @param b_stack Pointer to the first link in a list.
- * @param num The number to find.
- * @return int Index of the location, will be lstsize if not found.
- */
-int		ft_depth(t_list *stack, int num);
+// void	ft_simple_sort(t_list **a_stack);
+void	ft_simple_sort(t_list **a_stack, t_list **b_stack, int argc);
 
 /**
  * @brief 
  * 
+ * @param a_stack 
+ * @param b_stack 
  */
-// int		push_swap(t_list **a_stack, t_list **b_stack);
+void	quicksort_a2b(t_list **a_stack, t_list **b_stack);
+
+/**
+ * @brief Takes the partially sorted list in b_stack, and sorts it back into 
+ * a_stack.
+ * @param a_stack Target (empty) stack for sorted list.
+ * @param b_stack Stack containing partially sorted results of quicksort_a2b.
+ */
+void	quicksort_b2a(t_list **a_stack, t_list **b_stack);
 
 /**
  * @brief Main function - checks there are >1 inputs, that they are valid 

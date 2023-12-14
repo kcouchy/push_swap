@@ -6,19 +6,18 @@
 #    By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 10:04:34 by kcouchma          #+#    #+#              #
-#    Updated: 2023/12/05 15:09:29 by kcouchma         ###   ########.fr        #
+#    Updated: 2023/12/14 15:41:50 by kcouchma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =								\
 				push_swap			\
-				errors				\
 				check_inputs		\
 				make_lists			\
 				mod_lists			\
 				sorting				\
-				sorting_combi		\
-				push_swap_utils
+				push_swap_utils		\
+				quick_sort_utils
 
 BONUS_SRCS =						\
 				

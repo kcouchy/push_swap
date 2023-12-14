@@ -6,20 +6,11 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:14:56 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/13 12:16:56 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/14 15:40:02 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
 
 int	ft_lstsize(t_list *lst)
 {
@@ -46,15 +37,39 @@ void	ft_lstclear(t_list **lst)
 	}
 }
 
-// void	ft_del_last(t_list **lst_ptr)
-// {
-// 	if (*lst_ptr == NULL)
-// 		return ;
-// 	while ((*lst_ptr)->next)
-// 		lst_ptr = &(*lst_ptr)->next;
-// 	free(*lst_ptr);
-// 	*lst_ptr = NULL;
-// }
+void	swap_nums(t_list *stack1, t_list *stack2)
+{
+	int		temp;
+	int		temp2;
+
+	temp = stack1->num;
+	temp2 = stack1->index;
+	stack1->num = stack2->num;
+	stack2->num = temp;
+	stack1->index = stack2->index;
+	stack2->index = temp2;
+}
+
+t_list	*ft_sort_stack(t_list *stack)
+{
+	t_list	*sorted;
+	t_list	*temp;
+
+	sorted = ft_lstmap(stack);
+	if (!sorted)
+		return (NULL);
+	while (ft_check_list(sorted) == 1)
+	{
+		temp = sorted;
+		while (temp->next)
+		{
+			if (temp->num > temp->next->num)
+				swap_nums(temp, temp->next);
+			temp = temp->next;
+		}
+	}
+	return (sorted);
+}
 
 int	ft_addindex(t_list **a_stack)
 {
@@ -80,6 +95,6 @@ int	ft_addindex(t_list **a_stack)
 		sorted = sorted->next;
 		i++;
 	}
-	ft_lstclear(&sorted);
+	free(sorted);
 	return (0);
 }
