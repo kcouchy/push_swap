@@ -6,53 +6,47 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/14 18:26:45 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/15 11:45:18 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_simple_sort(t_list **a_stack, t_list **b_stack, int argc)
+void	ft_sort_3(t_list **a_stack)
 {
-	t_list	*temp;
-
-	temp = *a_stack;
-	ft_printf("%d\n", argc);
-	while (temp)
-	{
-		if (temp->index < (argc - 2))
-		{
-			if (ft_pa_pb(a_stack, b_stack, 'b') == 0)
-				temp = *a_stack;
-		}
-		temp = temp->next;
-	}
-	if (ft_check_list(*a_stack) == 1)
+	if (ft_check_list(*a_stack) == 0)
+		return ;
+	if ((*a_stack)->num > (*a_stack)->next->num)
 		ft_sa_sb(*a_stack, 'a');
-	quicksort_b2a(a_stack, b_stack);
+	if (ft_check_list(*a_stack) == 0)
+		return ;
+	if ((ft_lstsize(*a_stack) == 3) && ((*a_stack)->next->num > (*a_stack)
+			->next->next->num))
+	{
+		ft_rra_rrb(a_stack, 'a');
+		if ((*a_stack)->num > (*a_stack)->next->num)
+			ft_sa_sb(*a_stack, 'a');
+	}
 	return ;
 }
 
-// void	ft_simple_sort(t_list **a_stack)
-// {
-// 	int	i;
+void	ft_simple_sort(t_list **a_stack, t_list **b_stack, int argc)
+{
+	int	list_len;
 
-// 	i = 0;
-// 	if (ft_check_list(*a_stack) == 0)
-// 		return ;
-// 	if ((*a_stack)->num > (*a_stack)->next->num)
-// 		ft_sa_sb(*a_stack, 'a');
-// 	if (ft_check_list(*a_stack) == 0)
-// 		return ;
-// 	if ((ft_lstsize(*a_stack) == 3) && ((*a_stack)->next->num > (*a_stack)
-// 			->next->next->num))
-// 	{
-// 		ft_rra_rrb(a_stack, 'a');
-// 		if ((*a_stack)->num > (*a_stack)->next->num)
-// 			ft_sa_sb(*a_stack, 'a');
-// 	}
-// 	return ;
-// }
+	list_len = argc;
+	while (list_len > 3)
+	{
+		if ((*a_stack)->index < (argc - 3))
+			ft_pa_pb(a_stack, b_stack, 'b');
+		else
+			ft_ra_rb(a_stack, 'a');
+		list_len = ft_lstsize(*a_stack);
+	}
+	ft_sort_3(a_stack);
+	quicksort_b2a(a_stack, b_stack);
+	return ;
+}
 
 void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 {
@@ -82,7 +76,13 @@ void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 		chunk += it_chunk + it_chunk;
 		a_size = ft_lstsize(*a_stack);
 	}
-}
+}/**
+//  * @brief Utility to print a list to the standard output to check progress.
+//  * @param stack pointer to a list to print.
+//  * @param name name to print before the contents.
+//  */
+// void	print_list(t_list *stack, char *name);
+
 
 void	quicksort_b2a(t_list **a_stack, t_list **b_stack)
 {
@@ -103,8 +103,8 @@ void	quicksort_b2a(t_list **a_stack, t_list **b_stack)
 		b_stack_size--;
 	}
 	a_stack_size = ft_lstsize(*a_stack);
-	closest = ft_closest(*a_stack, 0);
-	ft_turny(a_stack, 'a', closest - 1, a_stack_size);
+	closest = ft_closest(*a_stack, -1);
+	ft_turny(a_stack, 'a', closest, a_stack_size);
 }
 
 int	main(int argc, char **argv)

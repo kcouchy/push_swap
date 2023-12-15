@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/14 18:24:30 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/15 11:47:03 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,9 +285,15 @@ int	ft_closest(t_list *a_stack, int index);
 /**
  * @brief Sorts list and generates output when the input consists of 2 or 3 
  * elements.
- * @param a_stack input stack once checked
+ * @param a_stack input stack to check and sort if needed.
  */
-// void	ft_simple_sort(t_list **a_stack);
+void	ft_sort_3(t_list **a_stack)
+
+/**
+ * @brief Sorts list and generates output when the input consists of 10 or 
+ * fewer elements.
+ * @param a_stack input stack to check and sort if needed.
+ */
 void	ft_simple_sort(t_list **a_stack, t_list **b_stack, int argc);
 
 /**
