@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/15 11:45:18 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:12:55 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 
 	a_size = ft_lstsize(*a_stack);
 	chunk = a_size * 0.10;
-	// if (a_size < 20)
-	// 	chunk = a_size;
 	it_chunk = chunk;
 	while (a_size > 1)
 	{
@@ -76,13 +74,7 @@ void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
 		chunk += it_chunk + it_chunk;
 		a_size = ft_lstsize(*a_stack);
 	}
-}/**
-//  * @brief Utility to print a list to the standard output to check progress.
-//  * @param stack pointer to a list to print.
-//  * @param name name to print before the contents.
-//  */
-// void	print_list(t_list *stack, char *name);
-
+}
 
 void	quicksort_b2a(t_list **a_stack, t_list **b_stack)
 {
@@ -115,12 +107,12 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	if (ft_checkinputs(argc, argv) == 1)
-		return (1);
+		return (ft_error());
 	if (argc == 2)
 		return (0);
 	a_stack = ft_makelist(argc, argv);
 	if (!a_stack)
-		return (1);
+		return (ft_error());
 	b_stack = NULL;
 	if (ft_check_list(a_stack) == 0)
 		return (0);

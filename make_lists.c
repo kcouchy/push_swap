@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:02:24 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/14 10:18:18 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:38:05 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,16 @@ t_list	*ft_makelist(int argc, char **argv)
 	int		i;
 
 	i = 1;
+	a_stack = NULL;
 	while (i < argc)
 	{
-		if (i == 1)
-		{
-			a_stack = ft_lstnew(ftps_atoi(argv[i]));
-			if (!a_stack)
-				return (a_stack);
-		}
-		else
-		{
-			temp = ft_lstnew(ftps_atoi(argv[i]));
-			if (!temp)
-				return (temp);
-			ft_lstadd_back(&a_stack, temp);
-		}
+		temp = ft_lstnew(ftps_atoi(argv[i]));
+		if (!temp)
+			return (temp);
+		ft_lstadd_back(&a_stack, temp);
 		i++;
 	}
-	ft_addindex(&a_stack);
+	if (ft_addindex(&a_stack) == 1)
+		return (NULL);
 	return (a_stack);
 }

@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/15 11:47:03 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:01:20 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,7 @@ int	ft_closest(t_list *a_stack, int index);
  * elements.
  * @param a_stack input stack to check and sort if needed.
  */
-void	ft_sort_3(t_list **a_stack)
+void	ft_sort_3(t_list **a_stack);
 
 /**
  * @brief Sorts list and generates output when the input consists of 10 or 

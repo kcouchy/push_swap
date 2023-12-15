@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:14:56 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/14 15:40:02 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:37:54 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,14 @@ int	ft_addindex(t_list **a_stack)
 {
 	t_list	*sorted;
 	t_list	*temp;
+	t_list	*temp2;
 	int		i;
 
 	i = 0;
 	sorted = ft_sort_stack(*a_stack);
 	if (!sorted)
-		return (ft_error());
-	temp = *a_stack;
+		return (1);
+	temp2 = sorted;
 	while (sorted)
 	{
 		sorted->index = i;
@@ -95,6 +96,6 @@ int	ft_addindex(t_list **a_stack)
 		sorted = sorted->next;
 		i++;
 	}
-	free(sorted);
+	ft_lstclear(&temp2);
 	return (0);
 }
