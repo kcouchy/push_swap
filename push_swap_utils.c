@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-// void	print_list(t_list *stack, char *name)
-// {
-// 	ft_printf("%s :\n", name);
-// 	while (stack)
-// 	{
-// 		ft_printf("in: %d num:%d \n", stack->index, stack->num);
-// 		stack = stack->next;
-// 	}
-// 	ft_printf("\n");
-// }
-
 int	ft_error(void)
 {
 	write(1, "Error\n", 6);
