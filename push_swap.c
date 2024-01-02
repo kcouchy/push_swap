@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/02 16:16:35 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/02 17:18:43 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_simple_sort(t_list **a_stack, t_list **b_stack, int argc)
 	}
 	ft_sort_3(a_stack);
 	quicksort_b2a(a_stack, b_stack);
+	ft_lstclear(a_stack);
 	return ;
 }
 
