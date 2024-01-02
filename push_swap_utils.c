@@ -6,22 +6,11 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:48:39 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/15 16:32:06 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:48:28 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// void	print_list(t_list *stack, char *name)
-// {
-// 	ft_printf("%s :\n", name);
-// 	while (stack)
-// 	{
-// 		ft_printf("in: %d num:%d \n", stack->index, stack->num);
-// 		stack = stack->next;
-// 	}
-// 	ft_printf("\n");
-// }
 
 int	ft_error(void)
 {

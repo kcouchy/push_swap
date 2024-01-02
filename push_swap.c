@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:32:00 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/02 15:15:32 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:16:35 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	ft_simple_sort(t_list **a_stack, t_list **b_stack, int argc)
 	return ;
 }
 
-void	quicksort_a2b(t_list **a_stack, t_list **b_stack)
+void	quicksort_a2b(t_list **a_stack, t_list **b_stack, int a_size)
 {
-	int	a_size;
 	int	chunk;
 	int	it_chunk;
 
-	a_size = ft_lstsize(*a_stack);
-	chunk = a_size * 0.10;
+	chunk = a_size * 0.13;
+	if (a_size > 250)
+		chunk = a_size * 0.05;
 	it_chunk = chunk;
 	while (a_size > 1)
 	{
@@ -103,6 +103,7 @@ int	main(int argc, char **argv)
 {
 	t_list	*a_stack;
 	t_list	*b_stack;
+	int		a_size;
 
 	if (argc < 2)
 		return (0);
@@ -116,9 +117,10 @@ int	main(int argc, char **argv)
 	b_stack = NULL;
 	if (ft_check_list(a_stack) == 0)
 		return (0);
-	if (argc <= 10)
+	if (argc <= 11)
 		return (ft_simple_sort(&a_stack, &b_stack, argc - 1), 0);
-	quicksort_a2b(&a_stack, &b_stack);
+	a_size = ft_lstsize(a_stack);
+	quicksort_a2b(&a_stack, &b_stack, a_size);
 	quicksort_b2a(&a_stack, &b_stack);
 	ft_lstclear(&a_stack);
 	return (0);

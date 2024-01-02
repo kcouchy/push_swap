@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2024/01/02 15:04:37 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/02 16:16:31 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,13 +196,6 @@ int		ft_rra_rrb(t_list **list, char a_b);
 /* push_swap_utils.c                                                          */
 /******************************************************************************/
 
-// /**
-//  * @brief Utility to print a list to the standard output to check progress.
-//  * @param stack pointer to a list to print.
-//  * @param name name to print before the contents.
-//  */
-// void	print_list(t_list *stack, char *name);
-
 /**
  * @brief to add to the return line in case of error. Prints "Error\n" to the 
  * standard output.
@@ -291,22 +284,31 @@ void	ft_sort_3(t_list **a_stack);
 
 /**
  * @brief Sorts list and generates output when the input consists of 10 or 
- * fewer elements.
+ * fewer elements. Pushes all but the three lowest values to b_stack, sorts
+ * a_stack using ft_sort_3, then pushes the rest of b_stack back using
+ * quicksort_b2a.
  * @param a_stack input stack to check and sort if needed.
  */
 void	ft_simple_sort(t_list **a_stack, t_list **b_stack, int argc);
 
 /**
- * @brief 
- * 
- * @param a_stack 
- * @param b_stack 
+ * @brief Takes the a_list and runs a first sort into b_stack. Splits the list
+ * into chunks (size optimised for testing). Runs through a_stack, pulls out 
+ * the values belonging to the chunks group by group, pushes to b_stack. B_stack
+ * will add rotate to add the value to the bottom if it's bigger than the top
+ * value.
+ * @param a_stack input stack starts with all numbers.
+ * @param b_stack destination stack for the first sorting.
+ * @param a_size the number of elements in a_stack (norminette bullshit).
  */
-void	quicksort_a2b(t_list **a_stack, t_list **b_stack);
+void	quicksort_a2b(t_list **a_stack, t_list **b_stack, int a_size);
 
 /**
  * @brief Takes the partially sorted list in b_stack, and sorts it back into 
- * a_stack.
+ * a_stack. First step involves copying over the maximum value from b_stack into
+ * a_stack. Then takes top value from b_stack - if it is smaller than the
+ * top value from a_stack then it will push over, otherwise will rotate a_stack
+ * until the next largest value in a_stack is at the top, then push.
  * @param a_stack Target (empty) stack for sorted list.
  * @param b_stack Stack containing partially sorted results of quicksort_a2b.
  */
@@ -314,10 +316,10 @@ void	quicksort_b2a(t_list **a_stack, t_list **b_stack);
 
 /**
  * @brief Main function - checks there are >1 inputs, that they are valid 
- * integers within int range,
- * Constructs the a_stack, initialises the b_stack. 
- * If the stack is already sorted, returns. 
- * If the stack is 2 or 3 elements, sorts it then returns.
+ * integers within int range (no non-numbers), and that there are no duplicates.
+ * Constructs the a_stack, initialises the b_stack.
+ * If the stack is already sorted, returns.
+ * If the stack is 2 or 3 elements, sorts using ft_simple_sort and returns.
  * Otherwise calls push_swap to sort the stack.
  * @param argc input
  * @param argv input
