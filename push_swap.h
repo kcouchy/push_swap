@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:45:14 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/15 14:01:20 by kcouchma         ###   ########.fr       */
+/*   Updated: 2024/01/02 15:04:37 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,7 +276,7 @@ void	ft_big2a(t_list **a_stack, t_list **b_stack);
  * @return int Returns the position in a_stack of the closest (next largest) 
  * value to that at the top of b_stack.
  */
-int	ft_closest(t_list *a_stack, int index);
+int		ft_closest(t_list *a_stack, int index);
 
 /******************************************************************************/
 /* Main Functions - push-swap.c                                               */

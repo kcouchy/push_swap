@@ -6,7 +6,7 @@
 /*   By: kcouchma <kcouchma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:02:24 by kcouchma          #+#    #+#             */
-/*   Updated: 2023/12/15 14:38:05 by kcouchma         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:57:47 by kcouchma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_list	*ft_makelist(int argc, char **argv)
 		ft_lstadd_back(&a_stack, temp);
 		i++;
 	}
-	if (ft_addindex(&a_stack) == 1)
-		return (NULL);
+	ft_addindex(&a_stack);
+	// if (ft_addindex(&a_stack) == 1)
+	// 	return (NULL);
 	return (a_stack);
 }
