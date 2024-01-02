@@ -77,7 +77,5 @@ t_list	*ft_makelist(int argc, char **argv)
 		i++;
 	}
 	ft_addindex(&a_stack);
-	// if (ft_addindex(&a_stack) == 1)
-	// 	return (NULL);
 	return (a_stack);
 }
